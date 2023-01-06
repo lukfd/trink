@@ -4,7 +4,7 @@ Trink App is a mobile, web application for a drinking game.
 
 # Backend
 
-*Stack:* ExpressJs and Sqlite
+**Stack:** ExpressJs and Sqlite
 
 Will connect to a database containing questions.
 Randomize order of questions based on:
@@ -48,7 +48,7 @@ The game will start.
 
 Loop back
 
-*Stack:* [reactNative](https://reactnative.dev/)
+**Stack:** [reactNative](https://reactnative.dev/)
 
 # Resources
 - [SQL LITE](https://www.sqlite.org/index.html)
