@@ -14,8 +14,11 @@ Randomize order of questions based on:
 **getQuestions**(typeOfGame: 'classic' or 'truthOrDare',
     modality: 'easy', 'flirt' or 'hot',
     players: 'playerName:male') returns an Array of objects
+
 addQuestion()
+
 deleteQuestion()
+
 changeQuestion()
 
 # Frontend
