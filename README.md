@@ -11,26 +11,9 @@ Randomize order of questions based on:
 
 ### End Points
 
-getQuestions(Obj) returns an Array of questions
-Input:
-```
-{
-    gameInfo: {
-        typeOfGame: 'Classic',
-        modality: 'Easy',
-    },
-    playersInfo: [
-        {
-            name: 'Player 1',
-            gender: 'Male'
-        }, {
-            name: 'Player 2',
-            gender: 'Female'
-        }
-    ]
-}
-```
-
+**getQuestions**(typeOfGame: 'classic' or 'truthOrDare',
+    modality: 'easy', 'flirt' or 'hot',
+    players: 'playerName:male') returns an Array of objects
 addQuestion()
 deleteQuestion()
 changeQuestion()
