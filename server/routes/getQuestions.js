@@ -3,7 +3,7 @@ var router = express.Router()
 var ourConvertUtility = require('../utility/convertUtility')
 
 const sqlite3 = require('sqlite3').verbose()
-const db = new sqlite3.Database('../database/database.db')
+const db = new sqlite3.Database('./database/database.db')
 
 function queryDatabase(tableName, player, maximumNumberOfQuestionsPerPlayer) {
     return new Promise((resolve, reject) => {
