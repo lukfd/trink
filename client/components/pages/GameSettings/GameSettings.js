@@ -14,11 +14,11 @@ const GameSettings = () => {
         <VStack space={4} alignItems="center">
           <Button w="64" h="20" bg="indigo.300" rounded="md" shadow={3} 
             onPress={() => { 
-              setIsShowTypePage(false) && gameSettings.push({type: 'classic'})
+              setIsShowTypePage(false); setGameSettings([...gameSettings, {type: 'classic'}])
             }}>Classico</Button>
           <Button w="64" h="20" bg="indigo.500" rounded="md" shadow={3} 
             onPress={() => { 
-              setIsShowTypePage(false) && gameSettings.push({type: 'truthOrDare'})
+              setIsShowTypePage(false); setGameSettings([...gameSettings, {type: 'truthOrDare'}])
             }}>Obbligo o Verità</Button>
         </VStack>
       </Center>
@@ -32,15 +32,15 @@ const GameSettings = () => {
         <VStack space={4} alignItems="center">
           <Button w="64" h="20" bg="indigo.300" rounded="md" size="lg" shadow={3}
           onPress={() => { 
-            setIsShowPlayersPage(true) && gameSettings.push({modality: 'easy'})
+            setIsShowPlayersPage(true); setGameSettings([...gameSettings, {modality: 'easy'}])
           }}>Easy</Button>
           <Button w="64" h="20" bg="indigo.500" rounded="md" size="lg" shadow={3}
           onPress={() => { 
-            setIsShowPlayersPage(true) && gameSettings.push({modality: 'flirt'})
+            setIsShowPlayersPage(true); setGameSettings([...gameSettings, {modality: 'flirt'}])
           }}>Flirt</Button>
           <Button w="64" h="20" bg="indigo.700" rounded="md" size="lg" shadow={3}
           onPress={() => { 
-            setIsShowPlayersPage(true) && gameSettings.push({modality: 'hot'})
+            setIsShowPlayersPage(true); setGameSettings([...gameSettings, {modality: 'hot'}])
           }}>Hot</Button>
         </VStack>
       </Center>
