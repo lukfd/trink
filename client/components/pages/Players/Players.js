@@ -4,62 +4,129 @@ import {
   Heading,
   Radio,
   Input,
-  Stack,
   Button,
   ScrollView,
-  VStack,
+  HStack,
+  Container,
+  Box,
+  View,
 } from 'native-base'
+import Questions from '../Questions/Questions'
 
 const Players = (props) => {
-  const [players, setPlayers] = useState('Maschio')
+  const [showPlayersPage, setIsShowPlayersPage] = useState(true)
+  const [playerName, setPlayerName] = useState('')
+  const [gender, setGender] = useState('male')
+  const [players, addPlayer] = useState([])
 
-  console.log(props)
-  return (
-    <ScrollView>
-      <Center>
-        <VStack>
-          <Stack direction="row" mb="2.5" mt="1.5" space={3}>
-            <Center>
-              <Heading my={100}>Aggiungi giocatori</Heading>
-              <Input size="2xl" placeholder="Nome" />
-              <Radio.Group
-                name="myRadioGroup"
-                accessibilityLabel="favorite number"
-                value={players}
-                onChange={(nextValue) => {
-                  setPlayers(nextValue)
-                }}
-              >
-                <Stack
-                  direction={{
-                    base: 'column',
-                    md: 'row',
-                  }}
-                  alignItems={{
-                    base: 'flex-start',
-                    md: 'center',
-                  }}
-                  space={4}
-                  w="75%"
-                  maxW="300px"
-                >
-                  <Radio value="one" my={1}>
-                    One
-                  </Radio>
-                  <Radio value="two" my={1}>
-                    Two
-                  </Radio>
-                </Stack>
-              </Radio.Group>
-            </Center>
-          </Stack>
-        </VStack>
-        <Button bg="indigo.500" onPress={() => console.log('hello world')}>
-          Aggiungi
-        </Button>
-      </Center>
-    </ScrollView>
-  )
+  function PlayersPage() {
+    return (
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <Center>
+            <Heading my={100}>Aggiungi giocatori</Heading>
+          </Center>
+          <Center>
+            <Container>
+              <Center w="xs">
+                <Input
+                  value={playerName}
+                  w="100%"
+                  onChangeText={setPlayerName}
+                  placeholder="Nome giocatore"
+                />
+              </Center>
+              <HStack space={2} justifyContent="center" mt={3}>
+                <Center mx={3}>
+                  <Radio.Group
+                    name="settingGeneder"
+                    accessibilityLabel="Select your gender"
+                    value={gender}
+                    onChange={(nextValue) => {
+                      setGender(nextValue)
+                    }}
+                  >
+                    <HStack>
+                      <Radio value="male" mx={2}>
+                        Maschio
+                      </Radio>
+                      <Radio value="female" mx={2}>
+                        Femmina
+                      </Radio>
+                    </HStack>
+                  </Radio.Group>
+                </Center>
+                <Center>
+                  <Button
+                    isDisabled={playerName === ''} //TODO Should also check for uniqness
+                    onPress={() => {
+                      addPlayer([
+                        ...players,
+                        { playerName: playerName, gender: gender },
+                      ])
+                      setPlayerName('')
+                    }}
+                  >
+                    Aggiungi
+                  </Button>
+                </Center>
+              </HStack>
+            </Container>
+          </Center>
+          <Center>
+            {players.map((value, index) => {
+              return (
+                <HStack key={index + 10000000}>
+                  <Box
+                    w="64"
+                    h="20"
+                    borderColor="coolGray.200"
+                    alignItems="center"
+                    alignContent="center"
+                    rounded="md"
+                    key={index}
+                  >
+                    {value.playerName}
+                  </Box>
+                  <Button
+                    key={index + 10000}
+                    alignContent="center"
+                    onPress={() => {
+                      addPlayer(
+                        players.filter((player) => {
+                          player.playerName !== value.playerName
+                        })
+                      )
+                    }}
+                  >
+                    Rimuovi
+                  </Button>
+                </HStack>
+              )
+            })}
+          </Center>
+        </ScrollView>
+        <View mb={20}>
+          <Center>
+            <Button
+              isDisabled={players.length === 0}
+              onPress={() => {
+                setIsShowPlayersPage(false)
+              }}
+            >
+              Inizia a giocare
+            </Button>
+          </Center>
+        </View>
+      </View>
+    )
+  }
+
+  if (showPlayersPage) {
+    return PlayersPage()
+  } else {
+    return <Questions gameSettings={props.gameSettings} players={players} />
+  }
 }
 
 export default Players
