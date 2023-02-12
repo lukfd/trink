@@ -2,41 +2,28 @@
 
 Trink App is a mobile, web application for a drinking game.
 
-# Backend
+# Client
 
-**Stack:** ExpressJs and Sqlite
+First should prompt the user a message in regards to what the game is. Each player will select the type of game they want to play and add their player information.
 
-Will connect to a database containing questions.
-Randomize order of questions based on:
+### Type and Modality of games
 
-### End Points
+Users can pick two **type** of game: either the Classic or Truth or Dare.
 
-**getQuestions**(typeOfGame: 'classic' or 'truthOrDare',
-    modality: 'easy', 'flirt' or 'hot',
-    players: 'playerName:male') returns an Array of objects
-
-addQuestion()
-
-deleteQuestion()
-
-changeQuestion()
-
-# Frontend
-First should prompt the user a message.
-
-Each player will add their name and gender.
-
-Users can pick two type of game: either the Classic or Truth or Dare.
-
-Each game will generate a set of questions based on the type of game and based on the modality (Easy, Flirt or Hot).
+Each game will generate a set of questions based on the type of game and based on the **modality** (Easy, Flirt or Hot).
 
 The game will start.
 
 Loop back
 
-**Stack:** [reactNative](https://reactnative.dev/)
+### Stack
+
+- [reactNative](https://reactnative.dev/)
+- [NativeBase](https://docs.nativebase.io/)
+- Some SQLite packages
 
 # Resources
+
 - [SQL LITE](https://www.sqlite.org/index.html)
 - [NPM SQLITE 3](https://www.npmjs.com/package/sqlite3)
 - [Express.js](https://expressjs.com/en/starter/generator.html)
