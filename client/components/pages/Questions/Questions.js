@@ -12,7 +12,7 @@ const Questions = (props) => {
       props.players[0].gender,
       10
     ).then((data) => {
-      console.log('IN USE EFFECT!', data)
+      setQuestions(data)
     })
   }, [])
 
