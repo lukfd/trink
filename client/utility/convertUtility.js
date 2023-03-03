@@ -1,5 +1,5 @@
 module.exports = {
-  async convertGender(gender) {
+  convertGender(gender) {
     gender = gender.toUpperCase()
     switch (gender) {
       case 'MALE':

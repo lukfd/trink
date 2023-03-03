@@ -17,28 +17,27 @@ async function openDatabase() {
   return SQLite.openDatabase('database.db')
 }
 
-export const getQuestions = async (
+export const getQuestions = (
   tableName,
   playerGender,
   maximumNumberOfQuestionsPerPlayer
 ) => {
-  const db = await openDatabase()
-  playerGender = await converter.convertGender(playerGender)
+  return new Promise((resolve, reject) => {
+    openDatabase().then((db) => {
+      playerGender = converter.convertGender(playerGender)
 
-  await db.exec(
-    [
-      {
-        sql: 'SELECT * FROM easyTable;',
-        args: [tableName],
-      },
-    ],
-    true,
-    (data, err) => {
-      if (err) {
-        throw err
-      } else {
-        return data
-      }
-    }
-  )
+      db.transaction((transaction) => {
+        transaction.executeSql(
+          `SELECT ${playerGender} FROM ${tableName} WHERE ? IS NOT NULL AND ${playerGender} != "" ORDER BY RANDOM() LIMIT ?;`,
+          [playerGender, maximumNumberOfQuestionsPerPlayer],
+          (transaction, result) => {
+            resolve(result.rows['_array'])
+          },
+          (transaction, err) => {
+            reject(err)
+          }
+        )
+      })
+    })
+  })
 }

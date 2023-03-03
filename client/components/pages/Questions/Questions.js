@@ -1,32 +1,38 @@
-import { useEffect } from 'react'
-import { Center, View, ScrollView, Button } from 'native-base'
+import { useCallback, useEffect, useState } from 'react'
+import { Center, View, ScrollView, Button, Text } from 'native-base'
 import { getQuestions } from '../../../utility/databaseUtility'
 
 const Questions = (props) => {
-  useEffect(() => {
-    // props is made of gameSettings (composed by type and modality) and players
-    async function loadData() {
-      try {
-        const questions = await getQuestions(
-          `${props.gameSettings[1].modality}Table`,
-          props.players[0].gender,
-          10
-        )
-        console.log(questions)
-      } catch (e) {}
-    }
+  // props is made of gameSettings (composed by type and modality) and players
+  const [questions, setQuestions] = useState([])
 
-    loadData()
+  useEffect(() => {
+    getQuestions(
+      `${props.gameSettings[1].modality}Table`,
+      props.players[0].gender,
+      10
+    ).then((data) => {
+      console.log('IN USE EFFECT!', data)
+    })
   }, [])
 
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView></ScrollView>
+      <ScrollView mt={200}>
+        <Center>
+          {questions?.map((value) => {
+            {
+              value
+            }
+          })}
+        </Center>
+      </ScrollView>
+
       <View mb={20}>
         <Center>
           <Button
             onPress={() => {
-              setIsShowPlayersPage(false)
+              console.log('PRESSED')
             }}
           >
             Prossima domanda
