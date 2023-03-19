@@ -19,15 +19,18 @@ const Questions = (props) => {
         player.gender,
         totalNumberOfQuestions
       ).then((data) => {
-        var questionsToAdd = []
+        var questionsToAddForSignlePlayer = []
 
         data.forEach((element) => {
-          questionsToAdd.push(Object.values(element)[0])
+          questionsToAddForSignlePlayer.push(Object.values(element)[0])
         })
 
-        setQuestions([
-          ...questions,
-          { playerName: player.playerName, questions: questionsToAdd },
+        setQuestions((previousQuestions) => [
+          ...previousQuestions,
+          {
+            playerName: player.playerName,
+            questions: questionsToAddForSignlePlayer,
+          },
         ])
       })
     })
@@ -54,10 +57,9 @@ const Questions = (props) => {
         <Center>
           <Button
             onPress={() => {
-              // console.log('PLAYER PLAYING', playerPlaying)
-              // console.log('QUESTION NUMBER', questionNumber)
-              // console.log('Questions', questions[playerPlaying])
-              console.log(playerPlaying)
+              console.log('PLAYER PLAYING', playerPlaying)
+              console.log('QUESTION NUMBER', questionNumber)
+              console.log('Questions Len', questions.length)
 
               // increase playerPlaying
               if (playerPlaying + 1 < questions.length) {
