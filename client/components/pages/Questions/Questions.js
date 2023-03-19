@@ -57,6 +57,7 @@ const Questions = (props) => {
               // console.log('PLAYER PLAYING', playerPlaying)
               // console.log('QUESTION NUMBER', questionNumber)
               // console.log('Questions', questions[playerPlaying])
+              console.log(playerPlaying)
 
               // increase playerPlaying
               if (playerPlaying + 1 < questions.length) {
