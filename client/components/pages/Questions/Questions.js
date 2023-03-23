@@ -57,10 +57,6 @@ const Questions = (props) => {
         <Center>
           <Button
             onPress={() => {
-              console.log('PLAYER PLAYING', playerPlaying)
-              console.log('QUESTION NUMBER', questionNumber)
-              console.log('Questions Len', questions.length)
-
               // increase playerPlaying
               if (playerPlaying + 1 < questions.length) {
                 setPlayerPlaying(playerPlaying + 1)
