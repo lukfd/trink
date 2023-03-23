@@ -94,7 +94,7 @@ const Players = (props) => {
                     onPress={() => {
                       addPlayer(
                         players.filter((player) => {
-                          player.playerName !== value.playerName
+                          return player.playerName !== value.playerName
                         })
                       )
                     }}
