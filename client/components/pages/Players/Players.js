@@ -76,7 +76,7 @@ const Players = (props) => {
           <Center>
             {players.map((value, index) => {
               return (
-                <HStack key={index + 10000000}>
+                <HStack key={index + 10000000} padding={4}>
                   <Box
                     w="64"
                     h="20"
@@ -90,7 +90,9 @@ const Players = (props) => {
                   </Box>
                   <Button
                     key={index + 10000}
+                    h="10"
                     alignContent="center"
+                    colorScheme="danger"
                     onPress={() => {
                       addPlayer(
                         players.filter((player) => {
