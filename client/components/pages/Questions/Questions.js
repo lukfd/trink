@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Center, View, ScrollView, Button } from 'native-base'
+import { Center, View, ScrollView, Button, IconButton } from 'native-base'
+import { MaterialIcons } from '@expo/vector-icons'
 import { getQuestions } from '../../../utility/databaseUtility'
-// import { End } from '../End/End'
+import End from '../End/End'
 
 const Questions = (props) => {
   // props is made of gameSettings (composed by type and modality) and players
@@ -11,28 +12,33 @@ const Questions = (props) => {
   var [questionNumber, setQuestionNumber] = useState(totalNumberOfQuestions - 1)
   var [questionToDisplay, setQuestionToDisplay] = useState('')
   var [playerNameToDisplay, setPlayerNameToDisplay] = useState('')
+  var [showQuestionsPage, setShowQuestionsPage] = useState(true)
 
   useEffect(() => {
     props.players.forEach((player) => {
-      getQuestions(
-        `${props.gameSettings[1].modality}Table`,
-        player.gender,
-        totalNumberOfQuestions
-      ).then((data) => {
-        var questionsToAddForSignlePlayer = []
+      try {
+        getQuestions(
+          `${props.gameSettings[1].modality}Table`,
+          player.gender,
+          totalNumberOfQuestions
+        ).then((data) => {
+          var questionsToAddForSignlePlayer = []
 
-        data.forEach((element) => {
-          questionsToAddForSignlePlayer.push(Object.values(element)[0])
+          data.forEach((element) => {
+            questionsToAddForSignlePlayer.push(Object.values(element)[0])
+          })
+
+          setQuestions((previousQuestions) => [
+            ...previousQuestions,
+            {
+              playerName: player.playerName,
+              questions: questionsToAddForSignlePlayer,
+            },
+          ])
         })
-
-        setQuestions((previousQuestions) => [
-          ...previousQuestions,
-          {
-            playerName: player.playerName,
-            questions: questionsToAddForSignlePlayer,
-          },
-        ])
-      })
+      } catch (error) {
+        console.error(error)
+      }
     })
   }, [])
 
@@ -46,42 +52,64 @@ const Questions = (props) => {
     setPlayerNameToDisplay(questions[playerPlaying].playerName)
   }
 
-  return (
-    <View style={{ flex: 1 }}>
-      <ScrollView mt={200}>
-        <Center>{playerNameToDisplay}</Center>
-        <Center>{questionToDisplay}</Center>
-      </ScrollView>
-
-      <View mb={20}>
-        <Center>
-          <Button
-            onPress={() => {
-              // increase playerPlaying
-              if (playerPlaying + 1 < questions.length) {
-                setPlayerPlaying(playerPlaying + 1)
-              } else {
-                setPlayerPlaying(0)
-              }
-
-              setPlayerNameToDisplay(questions[playerPlaying].playerName)
-
-              if (questionNumber - 1 >= 0) {
-                setQuestionNumber(questionNumber - 1)
-                setQuestionToDisplay(
-                  questions[playerPlaying].questions[questionNumber - 1]
-                )
-              } else {
-                console.log('DONE')
-              }
+  function QuestionsPage() {
+    return (
+      <View style={{ flex: 1 }}>
+        <View mt={20} ml={80}>
+          <IconButton
+            size="lg"
+            variant="ghost"
+            _icon={{
+              as: MaterialIcons,
+              name: 'close',
             }}
-          >
-            Prossima domanda
-          </Button>
-        </Center>
+            onPress={() => {
+              setShowQuestionsPage(false)
+            }}
+          />
+        </View>
+
+        <ScrollView mt={200}>
+          <Center>{playerNameToDisplay}</Center>
+          <Center>{questionToDisplay}</Center>
+        </ScrollView>
+
+        <View mb={20}>
+          <Center>
+            <Button
+              onPress={() => {
+                // increase playerPlaying
+                if (playerPlaying + 1 < questions.length) {
+                  setPlayerPlaying(playerPlaying + 1)
+                } else {
+                  setPlayerPlaying(0)
+                }
+
+                setPlayerNameToDisplay(questions[playerPlaying].playerName)
+
+                if (questionNumber - 1 >= 0) {
+                  setQuestionNumber(questionNumber - 1)
+                  setQuestionToDisplay(
+                    questions[playerPlaying].questions[questionNumber - 1]
+                  )
+                } else {
+                  setShowQuestionsPage(false)
+                }
+              }}
+            >
+              Prossima domanda
+            </Button>
+          </Center>
+        </View>
       </View>
-    </View>
-  )
+    )
+  }
+
+  if (showQuestionsPage) {
+    return QuestionsPage()
+  } else {
+    return <End />
+  }
 }
 
 export default Questions

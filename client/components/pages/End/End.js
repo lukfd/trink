@@ -1,25 +1,37 @@
-import { Center, View, ScrollView, Button, Text } from 'native-base'
+import { Center, View, ScrollView, Button } from 'native-base'
+import { useState } from 'react'
+import GameSettings from '../GameSettings/GameSettings'
 
-const Questions = (props) => {
-  return (
-    <View style={{ flex: 1 }}>
-      <ScrollView mt={200}>
-        <Center>Done</Center>
-      </ScrollView>
+const End = () => {
+  var [showEndPage, setShowEndPage] = useState(true)
 
-      <View mb={20}>
-        <Center>
-          <Button
-            onPress={() => {
-              console.log('PRESSED')
-            }}
-          >
-            Gioca di nuovo
-          </Button>
-        </Center>
+  function EndPage() {
+    return (
+      <View style={{ flex: 1 }}>
+        <ScrollView mt={200}>
+          <Center>Chi ha vinto?</Center>
+        </ScrollView>
+
+        <View mb={20}>
+          <Center>
+            <Button
+              onPress={() => {
+                setShowEndPage(false)
+              }}
+            >
+              Gioca di nuovo
+            </Button>
+          </Center>
+        </View>
       </View>
-    </View>
-  )
+    )
+  }
+
+  if (showEndPage) {
+    return EndPage()
+  } else {
+    return <GameSettings />
+  }
 }
 
-export default Questions
+export default End

@@ -58,7 +58,7 @@ const Players = (props) => {
                 </Center>
                 <Center>
                   <Button
-                    isDisabled={playerName === ''} //TODO Should also check for uniqness
+                    isDisabled={playerName === ''} //TODO Should also check for uniqness (try using the some method)
                     onPress={() => {
                       addPlayer([
                         ...players,

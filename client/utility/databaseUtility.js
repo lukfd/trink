@@ -3,6 +3,12 @@ import * as FileSystem from 'expo-file-system'
 import { Asset } from 'expo-asset'
 import * as converter from './convertUtility'
 
+async function isDatabaseOpen() {
+  return (
+    await FileSystem.getInfoAsync(FileSystem.documentDirectory + 'SQLite')
+  ).exists
+}
+
 async function openDatabase() {
   if (
     !(await FileSystem.getInfoAsync(FileSystem.documentDirectory + 'SQLite'))
