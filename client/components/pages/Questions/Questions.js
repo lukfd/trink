@@ -71,7 +71,7 @@ const Questions = (props) => {
 
         <ScrollView mt={200}>
           <Center>{playerNameToDisplay}</Center>
-          <Center>{questionToDisplay}</Center>
+          <Center px={4}>{questionToDisplay}</Center>
         </ScrollView>
 
         <View mb={20}>
