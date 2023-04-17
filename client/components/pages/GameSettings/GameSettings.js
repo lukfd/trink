@@ -1,5 +1,6 @@
 import { React, useState } from 'react'
-import { Center, VStack, Heading, Button } from 'native-base'
+import { Center, VStack, Heading, Button, View, IconButton } from 'native-base'
+import { AntDesign } from '@expo/vector-icons'
 import Players from '../Players/Players'
 
 const GameSettings = () => {
@@ -47,6 +48,17 @@ const GameSettings = () => {
     return (
       <Center flex={1}>
         <Heading my={100}>Scegli la modalità</Heading>
+        <IconButton
+          size="lg"
+          variant="ghost"
+          _icon={{
+            as: AntDesign,
+            name: 'back',
+          }}
+          onPress={() => {
+            setIsShowTypePage(true)
+          }}
+        />
         <VStack space={4} alignItems="center">
           <Button
             w="64"

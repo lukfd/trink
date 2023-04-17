@@ -6,7 +6,8 @@ import End from '../End/End'
 
 const Questions = (props) => {
   // props is made of gameSettings (composed by type and modality) and players
-  const totalNumberOfQuestions = 30 / props.players.length
+  const totalNumberOfPlayers = props.players.length
+  const totalNumberOfQuestions = 30 / totalNumberOfPlayers
   const [questions, setQuestions] = useState([])
   var [playerPlaying, setPlayerPlaying] = useState(0)
   var [questionNumber, setQuestionNumber] = useState(totalNumberOfQuestions - 1)
@@ -78,23 +79,27 @@ const Questions = (props) => {
           <Center>
             <Button
               onPress={() => {
+                console.log('PRESSED')
+                console.log(playerPlaying, questionNumber)
+
                 // increase playerPlaying
                 if (playerPlaying + 1 < questions.length) {
                   setPlayerPlaying(playerPlaying + 1)
-                } else {
-                  setPlayerPlaying(0)
-                }
-
-                setPlayerNameToDisplay(questions[playerPlaying].playerName)
-
-                if (questionNumber - 1 >= 0) {
-                  setQuestionNumber(questionNumber - 1)
                   setQuestionToDisplay(
-                    questions[playerPlaying].questions[questionNumber - 1]
+                    questions[playerPlaying].questions[questionNumber]
                   )
                 } else {
-                  setShowQuestionsPage(false)
+                  setPlayerPlaying(0)
+                  if (questionNumber - 1 >= 0) {
+                    setQuestionNumber(questionNumber - 1)
+                    setQuestionToDisplay(
+                      questions[playerPlaying].questions[questionNumber - 1]
+                    )
+                  } else {
+                    setShowQuestionsPage(false)
+                  }
                 }
+                setPlayerNameToDisplay(questions[playerPlaying].playerName)
               }}
             >
               Prossima domanda
