@@ -24,6 +24,7 @@ Loop back
 
 # Resources
 
+- [Apple guidelines](https://developer.apple.com/app-store/review/guidelines/#safety)
 - [SQL LITE](https://www.sqlite.org/index.html)
 - [NPM SQLITE 3](https://www.npmjs.com/package/sqlite3)
 - [Express.js](https://expressjs.com/en/starter/generator.html)
