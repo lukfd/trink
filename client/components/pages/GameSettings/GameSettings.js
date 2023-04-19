@@ -57,6 +57,7 @@ const GameSettings = () => {
           }}
           onPress={() => {
             setIsShowTypePage(true)
+            setGameSettings([])
           }}
         />
         <VStack space={4} alignItems="center">
