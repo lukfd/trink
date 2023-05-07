@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Platform } from 'react-native'
 import { Center, View, ScrollView, Button, IconButton } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
 import { getQuestions } from '../../../utility/databaseUtility'
@@ -18,25 +19,29 @@ const Questions = (props) => {
   useEffect(() => {
     props.players.forEach((player) => {
       try {
-        getQuestions(
-          `${props.gameSettings[1].modality}Table`,
-          player.gender,
-          totalNumberOfQuestions
-        ).then((data) => {
-          var questionsToAddForSignlePlayer = []
+        if (Platform.OS === 'web') {
+          console.log('HERE', Platform.OS)
+        } else {
+          getQuestions(
+            `${props.gameSettings[1].modality}Table`,
+            player.gender,
+            totalNumberOfQuestions
+          ).then((data) => {
+            var questionsToAddForSignlePlayer = []
 
-          data.forEach((element) => {
-            questionsToAddForSignlePlayer.push(Object.values(element)[0])
+            data.forEach((element) => {
+              questionsToAddForSignlePlayer.push(Object.values(element)[0])
+            })
+
+            setQuestions((previousQuestions) => [
+              ...previousQuestions,
+              {
+                playerName: player.playerName,
+                questions: questionsToAddForSignlePlayer,
+              },
+            ])
           })
-
-          setQuestions((previousQuestions) => [
-            ...previousQuestions,
-            {
-              playerName: player.playerName,
-              questions: questionsToAddForSignlePlayer,
-            },
-          ])
-        })
+        }
       } catch (error) {
         console.error(error)
       }
