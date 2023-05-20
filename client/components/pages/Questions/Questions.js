@@ -3,6 +3,7 @@ import { Platform } from 'react-native'
 import { Center, View, ScrollView, Button, IconButton } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
 import { getQuestions } from '../../../utility/databaseUtility'
+import { getQuestions as JsonGetQuestions } from '../../../utility/jsonUtility'
 import End from '../End/End'
 
 const Questions = (props) => {
@@ -20,7 +21,19 @@ const Questions = (props) => {
     props.players.forEach((player) => {
       try {
         if (Platform.OS === 'web') {
-          console.log('HERE', Platform.OS)
+          JsonGetQuestions(
+            props.gameSettings[1].modality,
+            player.gender,
+            totalNumberOfQuestions
+          ).then((data) => {
+            setQuestions((previousQuestions) => [
+              ...previousQuestions,
+              {
+                playerName: player.playerName,
+                questions: data,
+              },
+            ])
+          })
         } else {
           getQuestions(
             `${props.gameSettings[1].modality}Table`,
