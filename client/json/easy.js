@@ -263,12 +263,10 @@ export default {
     'Scegli un giocatore che ti tenga le gambe ferme mentre effettui 10 ripetizio',
     'se non hai coraggio bevi x1!',
     'se non hai coraggio bevi x1!',
-    'finché un giocatore non ripeterà un sinonimo già detto o non avrà più idee e dov',
     'finché un giocatore non ripeterà un sinonimo già detto o non avrà più idee e dovrà bere x1/2!',
     'finché un giocatore non ripeterà un sinonimo già detto o non avrà più idee e dovrà bere x1/2!',
     'finché un giocatore non ripeterà un sinonimo già detto o non avrà più idee e dovrà bere x1/2!',
     'finché un giocatore non ripeterà un sinonimo già detto o non avrà più idee e dovrà bere x1/2!',
-    'finché un giocatore non ripeterà un sinonimo già detto o',
     'avrà più idee e dovrà bere x1/2!',
   ],
 }
