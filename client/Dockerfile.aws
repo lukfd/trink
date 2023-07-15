@@ -1,0 +1,6 @@
+FROM --platform=linux/amd64 public.ecr.aws/docker/library/node
+
+WORKDIR /trink
+COPY . .
+
+CMD ["npx", "serve", "web-build"]
