@@ -2,7 +2,7 @@ init:
 	npm install
 	npx expo export:web
 
-build:	
+build-image:	
 	docker build -t trinkapp-image .
 
 build-aws:
